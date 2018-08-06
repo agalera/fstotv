@@ -2,4 +2,10 @@
 send video in local to chromecast
 
 
-python fstotv.py example.mp4
+```bash
+pip3 install fstotv
+```
+
+```bash
+fstotv example.mp4
+```
