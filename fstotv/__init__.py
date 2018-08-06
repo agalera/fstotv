@@ -6,7 +6,7 @@ import termios
 from threading import Thread
 
 from bottle import get, static_file, run
-from devices import get_devices
+from .devices import get_devices
 
 
 def get_ch():
@@ -29,7 +29,7 @@ def run_server():
     run(host="0.0.0.0", port=2015)
 
 
-if __name__ == "__main__":
+def start():
     ip = socket.gethostbyname(socket.gethostname())
     t = Thread(target=run_server)
     t.daemon = True
@@ -54,8 +54,9 @@ if __name__ == "__main__":
             print("pause")
 
         elif letter in ['d']:
-            print("%.2f / %.2f" % (device.cast.media_controller.status.adjusted_current_time,
-                               device.cast.media_controller.status.duration))
+            print("%.2f / %.2f" % (
+                device.cast.media_controller.status.adjusted_current_time,
+                device.cast.media_controller.status.duration))
 
         elif letter in ['+', '=']:
             print("increase volume")
@@ -87,3 +88,7 @@ if __name__ == "__main__":
             exit()
         else:
             print("press x to exit")
+
+
+if __name__ == "__main__":
+    start()
